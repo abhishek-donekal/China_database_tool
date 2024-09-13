@@ -2,7 +2,7 @@ setuptools==68.0.0
 wheel==0.41.0
 streamlit==1.24.0
 pandas==2.0.3
-numpy==1.24.0  # Downgrading to avoid build issues
+numpy>=1.24.0,<1.25.0  # Add a range to avoid issues
 matplotlib==3.8.0
 scikit-learn==1.3.0
 plotly==5.17.0
