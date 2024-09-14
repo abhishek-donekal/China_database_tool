@@ -1,7 +1,7 @@
-streamlit==1.25.0
-pandas==2.1.1
-requests==2.31.0
-openai==0.28.0
-beautifulsoup4==4.12.2
-python-dotenv==1.0.0
-Pillow==9.5.0
+streamlit
+pandas
+requests
+openai
+beautifulsoup4
+python-dotenv
+Pillow
