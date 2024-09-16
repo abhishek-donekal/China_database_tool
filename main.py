@@ -5,10 +5,10 @@ import openai
 from bs4 import BeautifulSoup
 
 # Title of the app
-st.title("Excel Sheet and Web Scraper with GPT-3.5 Turbo (ScrapingBee)")
+st.title("Chinese Activity Database Updater with GPT-3.5 Turbo (ScrapingBee)")
 
 # Step 1: File uploader to upload Excel file
-uploaded_file = st.file_uploader("Choose an Excel file", type=["xlsx", "xls"])
+uploaded_file = st.file_uploader("Upload your Chinese activity database (Excel format)", type=["xlsx", "xls"])
 
 # Proceed if the user uploads a file
 if uploaded_file is not None:
@@ -17,16 +17,16 @@ if uploaded_file is not None:
         df = pd.read_excel(uploaded_file)
 
         # Display the existing data in Excel sheet
-        st.write("### Current Data in Excel Sheet:")
+        st.write("### Current Data in the Database:")
         st.dataframe(df.head())  # Display the first few rows
 
         # Extract column names
         columns = df.columns.tolist()
-        st.write("### Column Names:")
+        st.write("### Column Names in the Database:")
         st.write(columns)
 
         # Step 2: URL input for web scraping
-        news_url = st.text_input("Enter a URL to scrape and analyze:")
+        news_url = st.text_input("Enter a news article URL related to Chinese activities to update the database:")
 
         # Step 3: Input fields to ask for API keys
         openai_api_key = st.text_input("OpenAI API Key", type="password")
@@ -52,7 +52,7 @@ if uploaded_file is not None:
                 st.write(scraped_text[:500] + "...")  # Show the first 500 characters of the scraped text
 
                 # Step 5: Use OpenAI GPT-3.5 Turbo to analyze the scraped text
-                st.write("### Extracting information that matches the Excel sheet columns using GPT-3.5 Turbo...")
+                st.write("### Extracting information that matches the database columns using GPT-3.5 Turbo...")
 
                 # Prepare the prompt for GPT-3.5 Turbo
                 messages = [
@@ -86,16 +86,16 @@ if uploaded_file is not None:
                     df = df.append(new_row, ignore_index=True)
 
                     # Display the updated DataFrame
-                    st.write("### Updated Data in Excel Sheet:")
+                    st.write("### Updated Data in the Database:")
                     st.dataframe(df)
 
                     # Allow the user to download the updated DataFrame
                     st.write("### Download the Updated Data as CSV:")
                     csv = df.to_csv(index=False).encode('utf-8')
                     st.download_button(
-                        label="Download data as CSV",
+                        label="Download updated database as CSV",
                         data=csv,
-                        file_name='updated_data.csv',
+                        file_name='updated_chinese_activity_database.csv',
                         mime='text/csv'
                     )
                 else:
@@ -112,4 +112,4 @@ if uploaded_file is not None:
     except Exception as e:
         st.error(f"Failed to load the Excel file: {e}")
 else:
-    st.write("Please upload an Excel file to proceed.")
+    st.write("Please upload your Chinese activity database (Excel file) to proceed.")
